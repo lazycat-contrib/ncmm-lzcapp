@@ -1,0 +1,13 @@
+params:
+  - id: admin_password
+    type: secret
+    name: "Admin Password"
+    description: "WebUI admin password (visible ASCII only, no spaces; used on first start and filled automatically at login)"
+    default_value: "$random(len=16)"
+    optional: true
+
+locales:
+  zh:
+    admin_password:
+      name: "管理员密码"
+      description: "WebUI 管理员密码（仅可见 ASCII 字符，不含空格；首次启动时自动设置，登录页自动填充）"

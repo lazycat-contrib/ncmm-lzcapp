@@ -1,0 +1,34 @@
+application:
+  subdomain: ncmm
+  multi_instance: false
+  public_path:
+    - /
+  upstreams:
+    - location: /
+      backend: http://ncmm:3899/
+  injects:
+    - id: login-autofill
+      auth_required: false
+      when:
+        - /*
+      do:
+        - src: builtin://simple-inject-password
+          params:
+            password: '{{ .U.admin_password | default "" }}'
+            passwordSelector: '#password-input'
+
+services:
+  ncmm:
+    # upstream: ghcr.io/3899/ncmm:1.2.5
+    image: ghcr.1ms.run/3899/ncmm:1.2.5
+    environment:
+      - TZ=Asia/Shanghai
+      - NCMM_WEB_ADMIN_PASSWORD={{ .U.admin_password | default "" }}
+    binds:
+      - /lzcapp/var/data:/data
+    # 首次启动且向导提供了密码时，预置 WebUI 管理员密码（跳过手动设置，登录页自动填充）。
+    # setup_script 在容器启动前执行，此时 WebUI 未运行，auth reset-password 可用。
+    setup_script: |
+      if [ ! -f /data/webui-auth.json ] && [ -n '{{ .U.admin_password | default "" }}' ]; then
+        printf '%s' '{{ .U.admin_password | default "" }}' | ncmm --home /data auth reset-password --password-stdin || true
+      fi

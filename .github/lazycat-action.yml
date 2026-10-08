@@ -1,0 +1,41 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: dist/ncmm.lpk
+  target_arch: amd64
+
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: ncmm
+
+build:
+  run_buildscript: false
+
+images:
+  # 纯 SemVer tag（当前 1.2.5），mirror 交付
+  - id: ncmm
+    target: service
+    service: ncmm
+    source: ghcr.io/3899/ncmm
+    channel: stable
+    sort: semver
+    tag_regex: '^\d+\.\d+\.\d+$'
+    delivery:
+      mode: mirror
+      require_digest_match: true
+
+stores:
+  official:
+    # Official store publication is intentionally disabled; publish only to MiaoMiao Store.
+    enabled: false
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: NCMM
+    summary: 网易云音乐人助手：一键签到、自动任务、接力刷播

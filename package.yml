@@ -1,0 +1,18 @@
+package: cloud.lazycat.app.ncmm
+version: 1.2.5
+name: NCMM
+description: "网易云音乐人助手：一键签到、自动任务、接力刷播"
+min_os_version: "1.5.0"
+homepage: https://github.com/3899/ncmm
+author: "3899"
+license: AGPL-3.0
+permissions:
+  required:
+    - net.internet
+locales:
+  zh:
+    name: NCMM
+    description: "网易云音乐人助手：一键签到、自动任务、接力刷播"
+  en:
+    name: NCMM
+    description: "NetEase Cloud Music musician assistant: daily sign-in, automation and play boosting"
