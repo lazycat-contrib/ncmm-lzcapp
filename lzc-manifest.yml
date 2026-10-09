@@ -16,11 +16,10 @@ application:
           params:
             password: '{{ .U.admin_password | default "" }}'
             passwordSelector: '#password-input'
-
 services:
   ncmm:
-    # upstream: ghcr.io/3899/ncmm:1.2.5
-    image: ghcr.1ms.run/3899/ncmm:1.2.5
+    # upstream: ghcr.io/3899/ncmm:1.2.7
+    image: ghcr.1ms.run/3899/ncmm:1.2.7
     environment:
       - TZ=Asia/Shanghai
       - NCMM_WEB_ADMIN_PASSWORD={{ .U.admin_password | default "" }}
