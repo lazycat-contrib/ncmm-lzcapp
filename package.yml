@@ -1,5 +1,5 @@
 package: cloud.lazycat.app.ncmm
-version: 1.2.8
+version: 1.2.9
 name: NCMM
 description: "网易云音乐人助手：一键签到、自动任务、接力刷播"
 min_os_version: "1.5.0"

@@ -18,8 +18,8 @@ application:
             passwordSelector: '#password-input'
 services:
   ncmm:
-    # upstream: ghcr.io/3899/ncmm:1.2.8
-    image: ghcr.1ms.run/3899/ncmm:1.2.8
+    # upstream: ghcr.io/3899/ncmm:1.2.9
+    image: ghcr.1ms.run/3899/ncmm:1.2.9
     environment:
       - TZ=Asia/Shanghai
       - NCMM_WEB_ADMIN_PASSWORD={{ .U.admin_password | default "" }}
